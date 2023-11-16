@@ -5,6 +5,9 @@ from education.models import Course, Lesson
 
 class CourseSerializer(serializers.ModelSerializer):
     """Класс-сериализатор для модели Course"""
+    # количество уроков у курса
+    count_lessons = serializers.IntegerField(source='lesson_set.all.count')
+
     class Meta:
         model = Course
         fields = '__all__'
