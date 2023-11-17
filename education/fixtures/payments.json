@@ -1,0 +1,123 @@
+[
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 2,
+      "date_of_payment": "2023-11-10",
+      "course": 1,
+      "lesson": null,
+      "amount": 60000,
+      "payment_method": "CASH"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 2,
+      "date_of_payment": "2023-11-11",
+      "course": null,
+      "lesson": 4,
+      "amount": 27000,
+      "payment_method": "CASH"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 2,
+      "date_of_payment": "2023-11-15",
+      "course": null,
+      "lesson": 5,
+      "amount": 35000,
+      "payment_method": "TRANSFER"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 3,
+      "date_of_payment": "2023-11-17",
+      "course": 2,
+      "lesson": null,
+      "amount": 70000,
+      "payment_method": "CASH"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 3,
+      "date_of_payment": "2023-11-17",
+      "course": null,
+      "lesson": 3,
+      "amount": 10000,
+      "payment_method": "CASH"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 3,
+      "date_of_payment": "2023-11-10",
+      "course": null,
+      "lesson": 1,
+      "amount": 30000,
+      "payment_method": "TRANSFER"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 3,
+      "date_of_payment": "2023-11-13",
+      "course": null,
+      "lesson": 2,
+      "amount": 20000,
+      "payment_method": "TRANSFER"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 4,
+      "date_of_payment": "2023-11-14",
+      "course": null,
+      "lesson": 5,
+      "amount": 35000,
+      "payment_method": "CASH"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 4,
+      "date_of_payment": "2023-11-06",
+      "course": null,
+      "lesson": 6,
+      "amount": 18000,
+      "payment_method": "CASH"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 4,
+      "date_of_payment": "2023-11-13",
+      "course": 1,
+      "lesson": null,
+      "amount": 60000,
+      "payment_method": "TRANSFER"
+    }
+  },
+  {
+    "model": "education.payments",
+    "fields": {
+      "user": 4,
+      "date_of_payment": "2023-11-09",
+      "course": null,
+      "lesson": 4,
+      "amount": 27000,
+      "payment_method": "TRANSFER"
+    }
+  }
+]

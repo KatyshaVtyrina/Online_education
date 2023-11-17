@@ -1,0 +1,19 @@
+[
+  {
+    "model": "education.course",
+    "fields": {
+      "title": "Python",
+      "preview": "",
+      "description": "Python"
+    }
+  },
+  {
+    "model": "education.course",
+    "fields": {
+      "title": "Web development",
+      "preview": "",
+      "description": "Web development"
+    }
+  }
+
+]
