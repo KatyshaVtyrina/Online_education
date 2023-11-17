@@ -1,7 +1,7 @@
 from rest_framework import viewsets, generics
 
-from education.models import Course, Lesson
-from education.serializers import CourseSerializer, LessonSerializer
+from education.models import Course, Lesson, Payments
+from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -30,3 +30,26 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
+
+
+class PaymentCreateAPIView(generics.CreateAPIView):
+    serializer_class = PaymentSerializer
+
+
+class PaymentListAPIView(generics.ListAPIView):
+    serializer_class = PaymentSerializer
+    queryset = Payments.objects.all()
+
+
+class PaymentRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = PaymentSerializer
+    queryset = Payments.objects.all()
+
+
+class PaymentUpdateAPIView(generics.UpdateAPIView):
+    serializer_class = PaymentSerializer
+    queryset = Payments.objects.all()
+
+
+class PaymentDestroyAPIView(generics.DestroyAPIView):
+    queryset = Payments.objects.all()
