@@ -88,16 +88,13 @@ python3 manage.py loaddata courses.json
 2. Добавить уроки
 ```bash
 python3 manage.py loaddata lessons.json
+
 ```
-3. Создать суперпользователя
+3. Создать пользователей и суперпользователя
 ```bash
-python3 manage.py сsu
+python3 manage.py create_users
 ```
-4. Создать пользователей
-```bash
-python3 manage.py loaddata users.json
-```
-5. Добавить платежи
+4. Добавить платежи
 ```bash
 python3 manage.py loaddata payments.json
 ```
