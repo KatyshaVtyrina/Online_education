@@ -81,18 +81,17 @@ python manage.py migrate
 ```
 
 ### Шаг 7: Заполение базы данных
-1. Добавить курсы
+1. Создать пользователей и суперпользователя
+```bash
+python3 manage.py create_users
+```
+2. Добавить курсы
 ```bash
 python3 manage.py loaddata courses.json
 ```
-2. Добавить уроки
+3.Добавить уроки
 ```bash
 python3 manage.py loaddata lessons.json
-
-```
-3. Создать пользователей и суперпользователя
-```bash
-python3 manage.py create_users
 ```
 4. Добавить платежи
 ```bash
