@@ -11,6 +11,7 @@ SPA-приложение, результатом создания которог
 - Пользователи
 - Курсы
 - Уроки
+- Платежи
 
 ## Подготовка к работе с проектом
 
@@ -79,7 +80,29 @@ SECRET_KEY=секретный ключ
 python manage.py migrate
 ```
 
-### Шаг 7: Запуск сервера Django
+### Шаг 7: Заполение базы данных
+1. Добавить курсы
+```bash
+python3 manage.py loaddata courses.json
+```
+2. Добавить уроки
+```bash
+python3 manage.py loaddata lessons.json
+```
+3. Создать суперпользователя
+```bash
+python3 manage.py сsu
+```
+4. Создать пользователей
+```bash
+python3 manage.py loaddata users.json
+```
+5. Добавить платежи
+```bash
+python3 manage.py loaddata payments.json
+```
+
+### Шаг 8: Запуск сервера Django
 1. Открыть новое окно терминала
 
 2. Запустить сервер

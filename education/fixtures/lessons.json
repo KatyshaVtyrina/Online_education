@@ -1,0 +1,62 @@
+[
+  {
+    "model": "education.lesson",
+    "fields": {
+      "title": "Django",
+      "preview": "",
+      "description": null,
+      "url": null,
+      "course": 1
+    }
+  },
+  {
+    "model": "education.lesson",
+    "fields": {
+      "title": "DRF",
+      "preview": "",
+      "description": null,
+      "url": null,
+      "course": 1
+    }
+  },
+  {
+    "model": "education.lesson",
+    "fields": {
+      "title": "PSQ",
+      "preview": "",
+      "description": null,
+      "url": null,
+      "course": 1
+    }
+  },
+  {
+    "model": "education.lesson",
+    "fields": {
+      "title": "HTML",
+      "preview": "",
+      "description": null,
+      "url": null,
+      "course": 2
+    }
+  },
+  {
+    "model": "education.lesson",
+    "fields": {
+      "title": "Javascript",
+      "preview": "",
+      "description": null,
+      "url": null,
+      "course": 2
+    }
+  },
+  {
+    "model": "education.lesson",
+    "fields": {
+      "title": "CSS",
+      "preview": "",
+      "description": null,
+      "url": null,
+      "course": 2
+    }
+  }
+]
