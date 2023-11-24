@@ -6,10 +6,11 @@ from users.models import User
 
 
 class LessonSerializer(serializers.ModelSerializer):
+    """Класс-сериализатор для модели Lesson"""
+
     course = SlugRelatedField(slug_field='title', queryset=Course.objects.all())
     owner = SlugRelatedField(slug_field='email', queryset=User.objects.all())
 
-    """Класс-сериализатор для модели Lesson"""
     class Meta:
         model = Lesson
         fields = '__all__'
