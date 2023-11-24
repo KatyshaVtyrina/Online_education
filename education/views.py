@@ -16,7 +16,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         permission_classes = []
         if self.action == 'create':
             permission_classes = [~IsStaff]
-        elif self.action == 'retrieve' or self.action == 'update':
+        elif self.action in ['retrieve', 'update', 'partial_update']:
             permission_classes = [IsOwnerOrIsStaff]
         elif self.action == 'destroy':
             permission_classes = [IsOwner]
