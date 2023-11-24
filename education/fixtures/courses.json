@@ -4,7 +4,8 @@
     "fields": {
       "title": "Python",
       "preview": "",
-      "description": "Python"
+      "description": "Python",
+      "owner": 2
     }
   },
   {
@@ -12,7 +13,8 @@
     "fields": {
       "title": "Web development",
       "preview": "",
-      "description": "Web development"
+      "description": "Web development",
+      "owner": 3
     }
   }
 
