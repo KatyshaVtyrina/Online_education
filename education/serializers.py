@@ -13,8 +13,8 @@ class LessonSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     """Класс-сериализатор для модели Course"""
     # количество уроков у курса
-    count_lessons = serializers.IntegerField(source='lesson_set.all.count')
-    lessons = LessonSerializer(source='lesson_set', many=True)
+    count_lessons = serializers.IntegerField(source='lesson_set.all.count', read_only=True)
+    lessons = LessonSerializer(source='lesson_set', many=True, read_only=True)
 
     class Meta:
         model = Course
@@ -26,4 +26,11 @@ class PaymentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Payments
+        fields = '__all__'
+
+
+class LessonListSerializer(serializers.ModelSerializer):
+    """Класс-сериализатор для модели Lesson"""
+    class Meta:
+        model = Lesson
         fields = '__all__'
