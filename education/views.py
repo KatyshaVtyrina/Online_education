@@ -3,14 +3,17 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, generics
 from rest_framework.filters import OrderingFilter
 
-from education.models import Course, Lesson, Payments
+from education.models import Course, Lesson, Payments, Subscription
+from education.paginators import CoursePaginator, LessonPaginator
 from education.permissions import IsStaff, IsOwner, IsOwnerOrIsStaff
-from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer, LessonCreateSerializer
+from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer, LessonCreateSerializer, \
+    SubscriptionSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
+    pagination_class = CoursePaginator
 
     def get_permissions(self):
         permission_classes = []
@@ -37,6 +40,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.filter()
+    pagination_class = LessonPaginator
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
