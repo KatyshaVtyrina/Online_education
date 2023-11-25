@@ -7,7 +7,7 @@ from education.models import Course, Lesson, Payments, Subscription
 from education.paginators import CoursePaginator, LessonPaginator
 from education.permissions import IsStaff, IsOwner, IsOwnerOrIsStaff
 from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer, LessonCreateSerializer, \
-    SubscriptionSerializer
+    SubscriptionSerializer, SubscriptionCreateSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -85,3 +85,19 @@ class PaymentUpdateAPIView(generics.UpdateAPIView):
 
 class PaymentDestroyAPIView(generics.DestroyAPIView):
     queryset = Payments.objects.all()
+
+
+class SubscriptionCreateAPIView(generics.CreateAPIView):
+    serializer_class = SubscriptionCreateSerializer
+
+    def perform_create(self, serializer):
+        """Автоматическое сохранение владельца при создании объекта"""
+        subscription = serializer.save()
+        subscription.user = self.request.user
+        subscription.save()
+
+
+class SubscriptionDestroyAPIView(generics.DestroyAPIView):
+    serializer_class = SubscriptionSerializer
+    queryset = Subscription.objects.all()
+
