@@ -5,7 +5,7 @@ from rest_framework.filters import OrderingFilter
 
 from education.models import Course, Lesson, Payments
 from education.permissions import IsStaff, IsOwner, IsOwnerOrIsStaff
-from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer
+from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer, LessonCreateSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -24,7 +24,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
-    serializer_class = LessonSerializer
+    serializer_class = LessonCreateSerializer
     permission_classes = [~IsStaff]
 
     def perform_create(self, serializer):
