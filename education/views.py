@@ -25,6 +25,12 @@ class CourseViewSet(viewsets.ModelViewSet):
             permission_classes = [IsOwner]
         return [permission() for permission in permission_classes]
 
+    def perform_create(self, serializer):
+        """Автоматическое сохранение владельца при создании объекта"""
+        new_course = serializer.save()
+        new_course.owner = self.request.user
+        new_course.save()
+
 
 class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonCreateSerializer
