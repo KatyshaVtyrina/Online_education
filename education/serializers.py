@@ -49,7 +49,7 @@ class CourseSerializer(serializers.ModelSerializer):
             subscription = Subscription.objects.filter(course=obj, user=user).first()
             if subscription:
                 return subscription.is_subscription
-            return "Подписка не создавалась"
+            return False
         return False
 
 
