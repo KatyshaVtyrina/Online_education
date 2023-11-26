@@ -2,6 +2,25 @@
   {
     "model": "users.user",
     "fields": {
+      "password": "12345",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-11-17T04:11:01.322Z",
+      "email": "admin@sky.pro",
+      "country": "Russia",
+      "phone": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "fields": {
       "password": "1111",
       "last_login": null,
       "is_superuser": false,

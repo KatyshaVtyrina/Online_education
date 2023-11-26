@@ -2,7 +2,7 @@
   {
     "model": "education.payments",
     "fields": {
-      "user": 2,
+      "user": 1,
       "date_of_payment": "2023-11-10",
       "course": 1,
       "lesson": null,
@@ -13,7 +13,7 @@
   {
     "model": "education.payments",
     "fields": {
-      "user": 2,
+      "user": 1,
       "date_of_payment": "2023-11-11",
       "course": null,
       "lesson": 4,
@@ -35,7 +35,7 @@
   {
     "model": "education.payments",
     "fields": {
-      "user": 3,
+      "user": 2,
       "date_of_payment": "2023-11-17",
       "course": 2,
       "lesson": null,

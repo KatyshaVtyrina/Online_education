@@ -6,7 +6,8 @@
       "preview": "",
       "description": null,
       "url": null,
-      "course": 1
+      "course": 1,
+      "owner": 1
     }
   },
   {
@@ -16,7 +17,8 @@
       "preview": "",
       "description": null,
       "url": null,
-      "course": 1
+      "course": 1,
+      "owner": 1
     }
   },
   {
@@ -26,7 +28,8 @@
       "preview": "",
       "description": null,
       "url": null,
-      "course": 1
+      "course": 1,
+      "owner": 2
     }
   },
   {
@@ -36,7 +39,8 @@
       "preview": "",
       "description": null,
       "url": null,
-      "course": 2
+      "course": 2,
+      "owner": 3
     }
   },
   {
@@ -46,7 +50,8 @@
       "preview": "",
       "description": null,
       "url": null,
-      "course": 2
+      "course": 2,
+      "owner": 3
     }
   },
   {
@@ -56,7 +61,8 @@
       "preview": "",
       "description": null,
       "url": null,
-      "course": 2
+      "course": 2,
+      "owner": 4
     }
   }
 ]
