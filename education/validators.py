@@ -8,5 +8,7 @@ class UrlValidator:
 
     def __call__(self, value):
         url = dict(value).get(self.field)
-        if 'youtube.com' not in str(url):
-            raise ValidationError('Cсылки на сторонние образовательные платформы или личные сайты прикреплять нельзя')
+        if url:
+            if 'youtube.com' not in str(url):
+                raise ValidationError('Cсылки на сторонние образовательные платформы или личные сайты '
+                                      'прикреплять нельзя')
