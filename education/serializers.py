@@ -64,21 +64,21 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 
 class LessonListSerializer(serializers.ModelSerializer):
-    """Класс-сериализатор для модели Lesson"""
+    """Класс-сериализатор просмотра списка уроков модели Lesson"""
     class Meta:
         model = Lesson
         fields = '__all__'
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
-
+    """Класс-сериализатор для модели Subscription"""
     class Meta:
         model = Subscription
         fields = '__all__'
 
 
 class SubscriptionCreateSerializer(serializers.ModelSerializer):
-
+    """Класс-сериализатор создания подписки модели Subscription"""
     class Meta:
         model = Subscription
         fields = '__all__'
@@ -92,4 +92,3 @@ class SubscriptionCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(f"Подписка уже существует.")
 
         return attrs
-
