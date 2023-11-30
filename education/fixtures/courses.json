@@ -5,7 +5,8 @@
       "title": "Python",
       "preview": "",
       "description": "Python",
-      "owner": 2
+      "owner": 2,
+      "price": 60000
     }
   },
   {
@@ -14,7 +15,8 @@
       "title": "Web development",
       "preview": "",
       "description": "Web development",
-      "owner": 3
+      "owner": 3,
+      "price": 70000
     }
   }
 
