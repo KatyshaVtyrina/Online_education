@@ -71,6 +71,7 @@ DB_USER=имя пользователя (postgres)
 DB_PASSWORD=пароль
 DB_NAME=название базы данных (education)
 SECRET_KEY=секретный ключ 
+STRIPE_SECRET_KEY=ключ для аутентификации в сервисе stripe
 ```
 *В проекте есть шаблон файла .env - `.env_example`
 
@@ -80,7 +81,7 @@ SECRET_KEY=секретный ключ
 python manage.py migrate
 ```
 
-### Шаг 7: Заполение базы данных
+### Шаг 7: Заполнение базы данных
 1. Создать пользователей и суперпользователя
 ```bash
 python3 manage.py create_users
@@ -92,10 +93,6 @@ python3 manage.py loaddata courses.json
 3.Добавить уроки
 ```bash
 python3 manage.py loaddata lessons.json
-```
-4. Добавить платежи
-```bash
-python3 manage.py loaddata payments.json
 ```
 
 ### Шаг 8: Запуск сервера Django
@@ -115,4 +112,33 @@ python manage.py runserver
 ### Результат покрытия тестами
 ```bash
  coverage_result.png
+```
+
+## Просмотр документации
+### Swagger
+```bash
+http://127.0.0.1:8000/swagger/
+```
+### Redoc
+```bash
+http://127.0.0.1:8000/redoc/
+```
+## Работа с сервисом stripe через Postman
+1. Получить токен
+```bash
+POST: http://localhost:8000/users/token/
+```
+2. Подключить авторизацию по токену
+3. Создать платеж
+```bash
+POST: http://localhost:8000/payment/create/
+body: {"course": <id курса>} 
+```
+4. Посмотреть детальную информацию по платежу
+```bash
+GET: http://localhost:8000/payment/<pk>/
+```
+5. Перейдя по ссылке для оплаты, совершить тестовый платеж
+```bash
+Тестовые данные: https://stripe.com/docs/terminal/references/testing#standard-test-cards
 ```
