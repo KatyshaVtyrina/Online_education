@@ -105,3 +105,14 @@ python3 manage.py loaddata payments.json
 ```bash
 python manage.py runserver
 ```
+
+## Запуск тестов
+
+### Для запуска тестов выполнить команду
+```bash
+ coverage3 run --source='.' manage.py test
+```
+### Результат покрытия тестами
+```bash
+ coverage_result.png
+```

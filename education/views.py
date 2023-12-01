@@ -3,14 +3,17 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, generics
 from rest_framework.filters import OrderingFilter
 
-from education.models import Course, Lesson, Payments
+from education.models import Course, Lesson, Payments, Subscription
+from education.paginators import CoursePaginator, LessonPaginator
 from education.permissions import IsStaff, IsOwner, IsOwnerOrIsStaff
-from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer
+from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer, LessonCreateSerializer, \
+    SubscriptionSerializer, SubscriptionCreateSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
+    pagination_class = CoursePaginator
 
     def get_permissions(self):
         permission_classes = []
@@ -22,9 +25,15 @@ class CourseViewSet(viewsets.ModelViewSet):
             permission_classes = [IsOwner]
         return [permission() for permission in permission_classes]
 
+    def perform_create(self, serializer):
+        """Автоматическое сохранение владельца при создании объекта"""
+        new_course = serializer.save()
+        new_course.owner = self.request.user
+        new_course.save()
+
 
 class LessonCreateAPIView(generics.CreateAPIView):
-    serializer_class = LessonSerializer
+    serializer_class = LessonCreateSerializer
     permission_classes = [~IsStaff]
 
     def perform_create(self, serializer):
@@ -37,6 +46,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.filter()
+    pagination_class = LessonPaginator
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
@@ -81,3 +91,19 @@ class PaymentUpdateAPIView(generics.UpdateAPIView):
 
 class PaymentDestroyAPIView(generics.DestroyAPIView):
     queryset = Payments.objects.all()
+
+
+class SubscriptionCreateAPIView(generics.CreateAPIView):
+    serializer_class = SubscriptionCreateSerializer
+
+    def perform_create(self, serializer):
+        """Автоматическое сохранение владельца при создании объекта"""
+        subscription = serializer.save()
+        subscription.user = self.request.user
+        subscription.save()
+
+
+class SubscriptionDestroyAPIView(generics.DestroyAPIView):
+    serializer_class = SubscriptionSerializer
+    queryset = Subscription.objects.all()
+
