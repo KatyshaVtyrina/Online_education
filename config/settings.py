@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'corsheaders',
+    'django_celery_beat'
 
     'users',
     'education',
