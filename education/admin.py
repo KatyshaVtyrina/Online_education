@@ -5,7 +5,7 @@ from education.models import Subscription, Course, Lesson, Payments
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'preview', 'description', 'owner')
+    list_display = ('title', 'preview', 'description', 'owner', 'price')
     search_fields = ('title',)
     list_filter = ('title',)
 
@@ -19,7 +19,7 @@ class LessonAdmin(admin.ModelAdmin):
 
 @admin.register(Payments)
 class PaymentsAdmin(admin.ModelAdmin):
-    list_display = ('user', 'date_of_payment', 'course', 'lesson', 'amount', 'payment_method')
+    list_display = ('user', 'date_of_payment', 'course', 'session_id', 'is_paid')
     search_fields = ('user',)
     list_filter = ('user', 'date_of_payment')
 

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
 
 from education.models import Course, Lesson, Payments, Subscription
+from education.services import stripe_retrieve_session
 from education.validators import UrlValidator
 from users.models import User
 
@@ -56,29 +57,58 @@ class CourseSerializer(serializers.ModelSerializer):
 class PaymentSerializer(serializers.ModelSerializer):
     """Класс-сериализатор для модели Payment"""
     course = SlugRelatedField(slug_field='title', queryset=Course.objects.all())
-    lesson = SlugRelatedField(slug_field='title', queryset=Lesson.objects.all())
+    user = SlugRelatedField(slug_field='email', queryset=User.objects.all())
 
     class Meta:
         model = Payments
-        fields = ('id', 'date_of_payment', 'amount', 'payment_method', 'course', 'lesson')
+        fields = '__all__'
+
+
+class PaymentCreateSerializer(serializers.ModelSerializer):
+    """Класс-сериализатор для создания модели Payment"""
+    payment_link = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Payments
+        fields = '__all__'
+
+    def get_payment_link(self, payment: Payments):
+        session = stripe_retrieve_session(payment.session_id)
+        return session.url
+
+
+class PaymentDetailSerializer(serializers.ModelSerializer):
+    """Класс-сериализатор для просмотра детальной информации по объекту Payment"""
+    course = SlugRelatedField(slug_field='title', queryset=Course.objects.all())
+    payment_link = serializers.SerializerMethodField()
+    user = SlugRelatedField(slug_field='email', queryset=User.objects.all())
+
+    class Meta:
+        model = Payments
+        fields = '__all__'
+
+    def get_payment_link(self, payment: Payments):
+        """Получает ссылку на оплату"""
+        session = stripe_retrieve_session(payment.session_id)
+        return session.url
 
 
 class LessonListSerializer(serializers.ModelSerializer):
-    """Класс-сериализатор для модели Lesson"""
+    """Класс-сериализатор просмотра списка уроков модели Lesson"""
     class Meta:
         model = Lesson
         fields = '__all__'
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
-
+    """Класс-сериализатор для модели Subscription"""
     class Meta:
         model = Subscription
         fields = '__all__'
 
 
 class SubscriptionCreateSerializer(serializers.ModelSerializer):
-
+    """Класс-сериализатор создания подписки модели Subscription"""
     class Meta:
         model = Subscription
         fields = '__all__'
@@ -92,4 +122,3 @@ class SubscriptionCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(f"Подписка уже существует.")
 
         return attrs
-

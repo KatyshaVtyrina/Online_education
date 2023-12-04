@@ -18,10 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date_of_payment', models.DateField(auto_now_add=True, null=True, verbose_name='дата оплаты')),
-                ('amount', models.PositiveIntegerField(verbose_name='сумма оплаты')),
-                ('payment_method', models.CharField(choices=[('CASH', 'Наличные'), ('TRANSFER', 'Перевод')], max_length=10, verbose_name='способ оплаты')),
                 ('course', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='payments', to='education.course')),
-                ('lesson', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='payments', to='education.lesson')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='пользователь')),
             ],
             options={

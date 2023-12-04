@@ -11,6 +11,7 @@ class Course(models.Model):
     preview = models.ImageField(verbose_name='картинка', **NULLABLE)
     description = models.TextField(verbose_name='описание', **NULLABLE)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='владелец', **NULLABLE)
+    price = models.PositiveIntegerField(default=50000, verbose_name='цена')
 
     def __str__(self):
         return f'Название курса - {self.title}'
@@ -18,6 +19,16 @@ class Course(models.Model):
     class Meta:
         verbose_name = 'курс'
         verbose_name_plural = 'курсы'
+
+    @property
+    def stripe_price_data(self) -> dict:
+        return {
+            'currency': 'usd',
+            'unit_amount': self.price,
+            'product_data': {
+                'name': self.title,
+            },
+        }
 
 
 class Lesson(models.Model):
@@ -37,19 +48,14 @@ class Lesson(models.Model):
 
 
 class Payments(models.Model):
-    PAYMENT_CHOICES = [
-        ('CASH', 'Наличные'),
-        ('TRANSFER', 'Перевод')
-    ]
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь', **NULLABLE)
     date_of_payment = models.DateField(auto_now_add=True, verbose_name='дата оплаты', **NULLABLE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='payments', **NULLABLE)
-    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='payments', **NULLABLE)
-    amount = models.PositiveIntegerField(verbose_name='сумма оплаты')
-    payment_method = models.CharField(max_length=10, choices=PAYMENT_CHOICES, verbose_name='способ оплаты')
+    session_id = models.CharField(max_length=150, editable=False, verbose_name='id сессии', **NULLABLE)
+    is_paid = models.BooleanField(default=False, verbose_name='статус платежа')
 
     def __str__(self):
-        return f'{self.course if self.course else self.lesson} - {self.amount} рублей, вид оплаты {self.payment_method}'
+        return f'Курс - {self.course}, статус оплаты - {self.is_paid}'
 
     class Meta:
         verbose_name = 'платеж'
