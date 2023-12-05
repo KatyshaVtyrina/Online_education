@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+from datetime import timedelta
+
 from dotenv import load_dotenv
 import os
 from pathlib import Path
@@ -44,7 +46,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'corsheaders',
-    'django_celery_beat'
+    'django_celery_beat',
 
     'users',
     'education',
@@ -139,7 +141,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ],
 }
 
@@ -156,3 +158,10 @@ STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
 
 CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'users.tasks.change_status_user',
+        'schedule': timedelta(minutes=1)
+    },
+}
