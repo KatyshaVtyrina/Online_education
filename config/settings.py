@@ -160,10 +160,6 @@ CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 
 CELERY_BEAT_SCHEDULE = {
-    'send_notification_update_course': {
-        'task': 'education.tasks.send_notification_update_course',
-        'schedule': timedelta(minutes=1)
-    },
     'change_status_user': {
         'task': 'users.tasks.change_status_user',
         'schedule': timedelta(minutes=1)
