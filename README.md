@@ -115,7 +115,7 @@ celery -A config worker -l info
 1. Открыть новое окно терминала
 2. Из каталога проекта запустить celery командой
 ```bash
-celery -A config beat -l info -S django
+celery -A config beat -l info 
 ```
 ### Шаг 11: Запуск сервера Django
 1. Открыть новое окно терминала
