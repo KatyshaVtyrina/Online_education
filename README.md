@@ -72,6 +72,8 @@ DB_PASSWORD=пароль
 DB_NAME=название базы данных (education)
 SECRET_KEY=секретный ключ 
 STRIPE_SECRET_KEY=ключ для аутентификации в сервисе stripe
+EMAIL_HOST_USER=адрес электронной почты для аутенфикации на почтовом сервере
+EMAIL_HOST_PASSWORD=пароль для аутенфикации на почтовом сервере
 ```
 *В проекте есть шаблон файла .env - `.env_example`
 
@@ -94,8 +96,28 @@ python3 manage.py loaddata courses.json
 ```bash
 python3 manage.py loaddata lessons.json
 ```
-
-### Шаг 8: Запуск сервера Django
+### Шаг 8: Установка и настройка Redis
+1. Установить
+```bash
+brew install redis
+```
+2. Запустить в отдельном окне терминала 
+```bash
+redis-server
+```
+### Шаг 9: Запуск celery
+1. Открыть новое окно терминала
+2. Из каталога проекта запустить celery командой
+```bash
+celery -A config worker -l info
+```
+### Шаг 10: Запуск celery-beat
+1. Открыть новое окно терминала
+2. Из каталога проекта запустить celery командой
+```bash
+celery -A config beat -l info 
+```
+### Шаг 11: Запуск сервера Django
 1. Открыть новое окно терминала
 
 2. Запустить сервер

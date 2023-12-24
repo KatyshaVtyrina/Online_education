@@ -1,4 +1,4 @@
-
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -14,6 +14,7 @@ from education.permissions import IsStaff, IsOwner, IsOwnerOrIsStaff
 from education.serializers import CourseSerializer, LessonSerializer, PaymentSerializer, LessonCreateSerializer, \
     SubscriptionSerializer, SubscriptionCreateSerializer, PaymentCreateSerializer, PaymentDetailSerializer
 from education.services import stripe_create_session, stripe_retrieve_session
+from education.tasks import send_notification_update_course
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -37,6 +38,11 @@ class CourseViewSet(viewsets.ModelViewSet):
         new_course = serializer.save()
         new_course.owner = self.request.user
         new_course.save()
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        send_notification_update_course.delay(instance.pk)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
