@@ -1,32 +1,40 @@
 version: '3'
 
 services:
+
+  redis:
+    image: redis
+    ports:
+      - '6380:6379'
+
   db:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
       - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=education
+      - POSTGRES_USER=postgres
 
     volumes:
       - pg_data:/var/lib/postgresql/data/pgdata
     ports:
       - '5432-5432'
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready']
+      test: ['CMD-SHELL', 'pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}']
       interval: 10s
       timeout: 5s
       retries: 5
 
   app:
     build: .
+    tty: true
     command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
-#    volumes:
-#      - .:/app
+    volumes:
+      - .:/app
     ports:
-      - '8001:8000'
+      - '8000:8000'
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
 
 volumes:
