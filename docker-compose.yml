@@ -36,6 +36,21 @@ services:
     depends_on:
       - db
 
+  celery:
+    build: .
+    tty: true
+    command: celery -A config worker -l info
+    depends_on:
+      - redis
+      - app
 
+  celery_beat:
+    build: .
+    restart: always
+    tty: true
+    command: celery -A config beat -l info
+    depends_on:
+      - redis
+      - app
 volumes:
   pg_data:
