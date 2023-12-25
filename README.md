@@ -158,6 +158,10 @@ docker-compose exec app python3 manage.py create_users
 docker-compose exec app python3 manage.py loaddata courses.json
 docker-compose exec app python3 manage.py loaddata lessons.json
 ```
+5. Запуск тестов 
+```bash
+docker-compose exec app coverage3 run --source='.' manage.py test
+```
 
 ## Работа с сервисом stripe через Postman
 1. Получить токен
