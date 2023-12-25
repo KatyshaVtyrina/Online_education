@@ -13,12 +13,14 @@ SPA-приложение, результатом создания которог
 - Уроки
 - Платежи
 
+
+
 ## Подготовка к работе с проектом
 
 ### Шаг 1: Клонирование проекта
 1. Зайти в терминал
 2. С помощью команды `cd` перейти в директорию, где будет находиться проект
-3. Склонировать проект
+3. Клонировать проект
 ```bash
 git clone https://github.com/KatyshaVtyrina/Online_education.git
 ```
@@ -67,9 +69,12 @@ CREATE DATABASE education;
 
 3. Записать в файл следующие настройки
 ```bash
-DB_USER=имя пользователя (postgres)
-DB_PASSWORD=пароль
-DB_NAME=название базы данных (education)
+POSTGRES_DB=название базы данных (education)
+POSTGRES_USER=имя пользователя(postgres)
+POSTGRES_PASSWORD=пароль
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
 SECRET_KEY=секретный ключ 
 STRIPE_SECRET_KEY=ключ для аутентификации в сервисе stripe
 EMAIL_HOST_USER=адрес электронной почты для аутенфикации на почтовом сервере
@@ -92,7 +97,7 @@ python3 manage.py create_users
 ```bash
 python3 manage.py loaddata courses.json
 ```
-3.Добавить уроки
+3. Добавить уроки
 ```bash
 python3 manage.py loaddata lessons.json
 ```
@@ -113,7 +118,7 @@ celery -A config worker -l info
 ```
 ### Шаг 10: Запуск celery-beat
 1. Открыть новое окно терминала
-2. Из каталога проекта запустить celery командой
+2. Из каталога проекта запустить celery-beat командой
 ```bash
 celery -A config beat -l info 
 ```
@@ -136,15 +141,24 @@ python manage.py runserver
  coverage_result.png
 ```
 
-## Просмотр документации
-### Swagger
+## Работа с проектом с помощью Docker
+
+1. Выполнить Шаги 1 и 5 Подготовки к проекту
+2. Чтобы создать образ, выполнить команду в терминале
 ```bash
-http://127.0.0.1:8000/swagger/
+docker-compose build  
 ```
-### Redoc
+3. Запуск проекта
 ```bash
-http://127.0.0.1:8000/redoc/
+docker-compose up
 ```
+4. Заполнение базы данных
+```bash
+docker-compose exec app python3 manage.py create_users
+docker-compose exec app python3 manage.py loaddata courses.json
+docker-compose exec app python3 manage.py loaddata lessons.json
+```
+
 ## Работа с сервисом stripe через Postman
 1. Получить токен
 ```bash
@@ -163,4 +177,14 @@ GET: http://localhost:8000/payment/<pk>/
 5. Перейдя по ссылке для оплаты, совершить тестовый платеж
 ```bash
 Тестовые данные: https://stripe.com/docs/terminal/references/testing#standard-test-cards
+```
+
+## Просмотр документации
+### Swagger
+```bash
+http://127.0.0.1:8000/swagger/
+```
+### Redoc
+```bash
+http://127.0.0.1:8000/redoc/
 ```
