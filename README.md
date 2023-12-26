@@ -199,3 +199,13 @@ http://127.0.0.1:8000/swagger/
 ```bash
 http://127.0.0.1:8000/redoc/
 ```
+
+## Просмотр документации c помощью Docker
+### Swagger
+```bash
+http://localhost:8000/swagger/
+```
+### Redoc
+```bash
+http://localhost:8000/redoc/
+```
